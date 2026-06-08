@@ -60,6 +60,10 @@ object Build : BuildType({
         }
         script {
             id = "SearchHunter"
+
+            conditions {
+                doesNotContain("teamcity.build.branch", "master")
+            }
             scriptContent = """
                 #!/bin/bash
                 WELCOMER_FILE=\${'$'}(find . -name "Welcomer.java" -type f | head -n 1)
