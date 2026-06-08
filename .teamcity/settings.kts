@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -56,6 +57,20 @@ object Build : BuildType({
             }
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
+        }
+        script {
+            id = "SearchHunter"
+            scriptContent = """
+                #!/bin/bash
+                WELCOMER_FILE=\${'$'}(find . -name "Welcomer.java" -type f | head -n 1)
+                
+                if grep -i "hunter" "\${'$'}WELCOMER_FILE"; then
+                echo "Слово 'hunter' найдено в файле \${'$'}WELCOMER_FILE."
+                else
+                echo "Слово 'hunter' НЕ найдено в файле \${'$'}WELCOMER_FILE."
+                exit 1
+                fi
+            """.trimIndent()
         }
     }
 })
