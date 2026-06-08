@@ -63,7 +63,6 @@ object Build : BuildType({
             scriptContent = """
                 #!/bin/bash
                 WELCOMER_FILE=\${'$'}(find . -name "Welcomer.java" -type f | head -n 1)
-                
                 if grep -i "hunter" "\${'$'}WELCOMER_FILE"; then
                 echo "Слово 'hunter' найдено в файле \${'$'}WELCOMER_FILE."
                 else
