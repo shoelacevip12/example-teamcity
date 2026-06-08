@@ -15,4 +15,8 @@ public class Welcomer{
 	public String saySome(){
 		return "something in the way";
 	}
+
+	public String sayHunterReplica() {
+		return "What are you yelling at? What have I done to you? Hunter... Hunting is when hunting. And when you don't want to, who needs it?";
+	}
 }
